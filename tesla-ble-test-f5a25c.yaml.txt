@@ -1,0 +1,45 @@
+# Standard ESP32 Devkit, Stand 24.09.24 - läuft mit meinem Auto
+
+
+esphome:
+  name: ${name}
+  name_add_mac_suffix: true
+  friendly_name: ${friendly_name}
+
+api:
+  encryption:
+    key: Cg/+mx6ZdH2QBdrmrKtg/zmG0TK/IDHBBr3DUJDXKpo=
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+#  ap:
+#    ssid: "ESPhome-1234567890"
+#    password: "1234567890"
+
+#captive_portal:
+
+
+button:
+  - platform: factory_reset
+    name: Restart with Factory Default Settings
+
+external_components:
+  source: github://yoziru/esphome-tesla-ble@main
+
+packages:
+  base:  github://yoziru/esphome-tesla-ble/packages/base.yml@main
+  device_base: github://yoziru/esphome-tesla-ble/boards/esp32-generic.yml@main
+  client: github://yoziru/esphome-tesla-ble/packages/client.yml@main
+  # listener: github://yoziru/esphome-tesla-ble/packages/listener.yml@main # Uncomment this to scan find your VIN BLE MAC address
+
+dashboard_import:
+  package_import_url: github://yoziru/esphome-tesla-ble/tesla-ble-esp32-generic.dashboard.yml@main
+
+substitutions:
+  name: tesla-test
+  friendly_name: "Tesla TEST f5a25c"
+  charging_amps_max: "16"
+  ble_mac_address: "74:46:B3:8B:AC:E4"
+  tesla_vin: "LRW3E7FS9PC821796"
+
